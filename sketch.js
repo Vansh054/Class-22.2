@@ -19,19 +19,20 @@ function setup() {
 	world = engine.world;
 
 	var package_options ={
-		isStatic:true
-	   }
+		isStatic:true,
+	    restitution: 0.5
+	}
 	var ground_options ={
-		isStatic:true, restitution: 3
+		isStatic:true,
 	}
 
-	packageBody = Bodies.circle(width/2 , 80, 5 , package_options);
+	packageBody = Bodies.rectangle(width/2 , 80, 50, 50, package_options);
 	World.add(world, packageBody);
 
-	ground = Bodies.rectangle(width/2, height-55, width, 10, ground_options);
+	ground = Bodies.rectangle(width/2, 650, width, 10, ground_options);
  	World.add(world, ground);
   
-	packageSprite=createSprite(packageBody.position.x, packageBody.position.y, 10,10);
+	packageSprite=createSprite(packageBody.position.x, packageBody.position.y, 50, 50);
 	packageSprite.addImage(packageIMG)
 	packageSprite.scale=0.2
 
@@ -65,9 +66,8 @@ function draw() {
 function keyPressed() {
  if (keyCode=== DOWN_ARROW) {
 	 Matter.Body.setStatic(packageBody,false)
+	 Matter.Body.setStatic(ground,true)
 	 
   }
 }
-
-
 
